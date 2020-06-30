@@ -36,10 +36,7 @@ public class Fibonacci {
      * @return
      */
     private static int getFibonacci(int length){
-        if(length < 0){
-            return 0;
-        }
-        if(length==0 || length==1){
+        if(length < 2){
             return 0;
         }
         if(length == 2){
@@ -49,10 +46,7 @@ public class Fibonacci {
     }
 
     private static int getFibonacciOptimize(int length){
-        if(length < 0){
-            return 0;
-        }
-        if(length==0 || length==1){
+        if(length < 2){
             return 0;
         }
         if(length == 2){

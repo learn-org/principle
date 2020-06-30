@@ -1,5 +1,7 @@
 package com.learn.thread;
 
+import com.learn.entity.Result;
+
 import java.util.concurrent.*;
 
 /**
@@ -9,7 +11,7 @@ import java.util.concurrent.*;
  */
 public class ExceptionInThreadPool {
 
-    public static class DivTask implements Runnable{
+    public static class DivTask implements Callable{
 
         public int a;
         public int b;
@@ -20,8 +22,19 @@ public class ExceptionInThreadPool {
         }
 
         @Override
-        public void run() {
-            System.out.println(a/b);
+        public Object call(){
+            Result result = new Result();
+            try{
+                if(b == 2){
+                    System.out.println(a / 0);
+                }
+                result.setMsg("返回值：" + b);
+                System.out.println(a/(b+1));
+            }catch (Exception e){
+                result.setMsg("报错了。。。");
+                return result;
+            }
+            return result;
         }
     }
 
@@ -29,9 +42,10 @@ public class ExceptionInThreadPool {
         ThreadPoolExecutor threadPoolExecutor = new TraceThreadPoolExecutor(0, Integer.MAX_VALUE, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>());
 
         for (int i=0; i < 5; i++){
-            threadPoolExecutor.execute(new DivTask(100, i));
-//            Future f = threadPoolExecutor.submit(new DivTask(100, i));
-//            f.get();
+//            threadPoolExecutor.execute(new DivTask(100, i));
+            Future<Result> f = threadPoolExecutor.submit(new DivTask(100, i));
+            Object o = f.get();
+            System.out.println("返回值：" + f.get().getMsg());
         }
 
         threadPoolExecutor.shutdown();
