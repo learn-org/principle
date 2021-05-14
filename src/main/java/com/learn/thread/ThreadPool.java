@@ -39,6 +39,7 @@ public class ThreadPool extends ThreadPoolExecutor {
         ThreadPool threadPool=new ThreadPool(1,2,10,TimeUnit.MINUTES,new LinkedBlockingDeque<>());
         threadPool.execute(runnable);
         threadPool.shutdown();
+        threadPool.prestartAllCoreThreads();
 //        FutureTask futureTask=(FutureTask)threadPool.submit(runnable);
 //        System.out.println(futureTask.isDone());
 

@@ -7,9 +7,9 @@ package com.learn.thread;
  */
 public class SynchronizedExplain {
     /*
-     *1，多个线程中，每个线程中创建一个对象实例访问实例方法的同一个同步方法，同步访问。
-     *2，多个线程中，每个线程中创建一个对象实例访问实例方法的不同的同步方法，异步访问。
-     *3，多个线程中，同一个对象实例访问实例方法的不同的同步方法，同步访问。
+     *1，多个线程中，每个线程中创建一个对象访问同一个同步实例方法，异步访问。
+     *2，多个线程中，每个线程中创建一个对象访问不同的同步实例方法，异步访问。
+     *3，多个线程中，同一个对象实例访问不同的同步实例方法，同步访问。
      *4，多个线程中，每个线程中创建一个对象实例访问类方法的不同的同步方法，同步访问。
      *5，多个线程中，类名访问类方法的不同的同步方法，同步访问。
      *6，多个线程中，每个线程中创建一个对象实例访问类方法的同一个同步方法，同步访问。
@@ -57,7 +57,8 @@ public class SynchronizedExplain {
             @Override
             public void run() {
                 try {
-                    SynchronizedExplain.synchronizedStaticMethod();
+//                    SynchronizedExplain.synchronizedStaticMethod();
+                    synchronizedExplain1.synchronizedMethod();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

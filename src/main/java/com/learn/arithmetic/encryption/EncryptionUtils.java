@@ -1,13 +1,12 @@
 package com.learn.arithmetic.encryption;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.security.GeneralSecurityException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
+
 import org.apache.commons.lang3.Validate;
 
 
@@ -19,18 +18,46 @@ import org.apache.commons.lang3.Validate;
 
 public class EncryptionUtils {
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        String data = "1111";
+    public static void main(String[] args) throws Exception {
+        String data = "中文摘要dsd";
         String data1 = "1111";
         String d =new String("fff");
         System.out.println(md5Encryption(data, "utf-8"));
         System.out.println(md5Encryption(data, "utf-8"));
         System.out.println(md5(data, "utf-8"));
         System.out.println(md5(data, "utf-8"));
+        md5File("C:\\work\\溢米\\crm\\需求文档\\小组课CRM\\CRM小组课Leads管理和我的Leads技术文档-刘香杰.xmind");
+        md5File("C:\\work\\溢米\\crm\\需求文档\\小组课CRM\\CRM对接小班一期.xmind");
+        md5File("C:\\work\\溢米\\crm\\需求文档\\小组课CRM\\CRM对接小班一期.xmind");
+        //c3db769aa56f84adb03f56e0357adb77
 
     }
-//    [B@3046da
-//[B@98129
+
+    /**
+     * 对文件进行摘要
+     * @param path
+     * @throws Exception
+     */
+    public static void md5File(String path) throws Exception{
+        DigestInputStream dis = new DigestInputStream(new FileInputStream(path) ,MessageDigest.getInstance("MD5"));
+        byte[]buffer = new byte[1024];
+        while(dis.read(buffer) > -1){
+
+        }
+        MessageDigest md5 = dis.getMessageDigest();
+        byte[] result = md5.digest();
+        System.out.println(toHexString(result));
+    }
+
+    public static String toHexString(byte[] bytes){
+        StringBuffer sb = new StringBuffer();
+        for(byte b: bytes){
+            String hex = Integer.toHexString(b & 0x0FF);
+            if(hex.length()==1) hex = "0" + hex;
+            sb.append(hex);
+        }
+        return sb.toString();
+    }
 
     public static String md5Encryption(String s, String charset){
         try {
