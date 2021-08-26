@@ -38,4 +38,41 @@ public class StringUtil {
         return result.toString();
     }
 
+    /**
+     * 根据分隔符转驼峰
+     * @param s
+     * @param delimiter
+     * @return
+     */
+    public static String toCamelCase(String s, String delimiter) {
+        if (s == null) {
+            return null;
+        }
+        if (delimiter == null || "".equals(delimiter)) {
+            return s;
+        }
+        if (s.indexOf(delimiter) == -1) {
+            return s;
+        }
+        s = s.toLowerCase();
+        StringBuilder sb = new StringBuilder(s.length());
+        boolean upperCase = false;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (String.valueOf(c).equals(delimiter)) {
+                upperCase = true;
+            } else if (upperCase) {
+                sb.append(Character.toUpperCase(c));
+                upperCase = false;
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(toCamelCase("aBc", "."));
+    }
+
 }
