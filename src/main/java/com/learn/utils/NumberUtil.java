@@ -1,9 +1,6 @@
 package com.learn.utils;
 
 import org.apache.commons.lang3.StringUtils;
-import org.omg.Messaging.SyncScopeHelper;
-
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.regex.Pattern;
